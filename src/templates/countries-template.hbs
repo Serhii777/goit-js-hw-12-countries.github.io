@@ -1,0 +1,20 @@
+{{!-- {{#each this}} <li> --}}
+<li>
+    <a href="{{url}}" target="_blank" rel="noopener noreferrer">
+        <div>
+            <h2 class="card__name">{{name}}</h2>
+            <img class="card__image" src="{{flag}}" alt="{{name}}">
+            <p class="card__capital">Capital: {{capital}}</p>
+            <p class="card__population">Population: {{population}}</p>
+            <ul class="card__list">Languages:
+                {{#each languages}}
+                    <li class="card__item">
+                        {{{this}}}
+                        {{!-- {{languages}} --}}
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </a>
+</li>
+{{!-- </li> {{/each}} --}}
