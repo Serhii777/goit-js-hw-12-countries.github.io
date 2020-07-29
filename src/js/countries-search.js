@@ -20,10 +20,9 @@ const refs = {
   clearButton: document.querySelector('#clear-button'),
 };
 
-const inputDelay = _.debounce(searchInputHandler, 1000);
+const inputDelay = _.debounce(searchInputHandler, 500);
 
 refs.input.addEventListener('input', inputDelay);
-// const inputListener = refs.input.addEventListener('input', inputDelay);
 refs.clearButton.addEventListener('click', resetPage);
 
 function searchInputHandler(event) {
@@ -35,21 +34,19 @@ function searchInputHandler(event) {
       return response.json();
     })
     .then(data => {
-      console.log(data);
 
       if (data.length >= 10) {
         spinner.hide();
         console.log('Сделай запрос более специфичным');
-
         notice();
       } else if (data.length > 2 && data.length < 10) {
         spinner.hide();
-        refs.countriesList.innerHTML = '';
         console.log('Покажи список стран');
-
+        refs.countriesList.innerHTML = '';
         renderListCountries(data);
       } else {
         spinner.hide();
+        console.log('Сделай карточку страны');
         refs.countriesList.innerHTML = '';
         renderCountriesRows(data);
       }
@@ -65,7 +62,7 @@ function notice() {
     text: 'Too many matches found. Please enter a more specific query!',
     width: '300px',
     type: 'error',
-    delay: 5000,
+    delay: 1500,
     remove: true,
     modal: true,
     overlayClose: true,
@@ -91,19 +88,19 @@ function notice() {
 }
 
 function renderListCountries(countries) {
-  const markup = countries
+  const markupList = countries
     .map(countries => listCountriesTemplate(countries))
     .join('');
 
-  refs.countriesList.insertAdjacentHTML('beforeend', markup);
+  refs.countriesList.insertAdjacentHTML('beforeend', markupList);
 }
 
 function renderCountriesRows(countries) {
-  const markup = countries
+  const markupCard = countries
     .map(countries => countriesTemplate(countries))
     .join('');
 
-  refs.countriesList.insertAdjacentHTML('beforeend', markup);
+  refs.countriesList.insertAdjacentHTML('beforeend', markupCard);
 }
 
 function resetPage() {
