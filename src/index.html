@@ -9,29 +9,24 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <!-- <link href="node_modules/@pnotify/core/dist/BrightTheme.css" rel="stylesheet" type="text/css" /> -->
-    <!-- <link rel="stylesheet" href="./sass/styles.scss" /> -->
-  </head>
+
+ </head>
   <body>
-   
     <form id="search-form" class="search-form">
       <input
         id="search-input"
         type="text"
+        class="search-input"
         name="query"
         placeholder="Search..."
         autocomplete="off"
       />
-      <button id="clear-button" type="reset">Clear</button>
+      <button id="clear-button" type="reset" class="clear-button">Clear</button>
     </form>
 
     <ul id="countries-list" class="countries-list"></ul>
 
-    <!-- <button type="button" data-action="load-more">Load more</button> -->
-
     <div class="spinner-overlay is-hidden" id="spinner">
-      <!-- <div class="spinner-overlay " id="spinner"> -->
-
       <div class="sk-circle">
         <div class="sk-circle1 sk-child"></div>
         <div class="sk-circle2 sk-child"></div>
@@ -47,8 +42,6 @@
         <div class="sk-circle12 sk-child"></div>
       </div>
     </div>
-
-    <!-- В этот список рендери разметку меню -->
-    <!-- <ul class="menu js-menu"></ul> -->
+    
   </body>
 </html>

@@ -1,0 +1,19 @@
+.countries-list{//ul
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+}
+
+.countries-list__item{//li
+list-style: none;
+}
+
+.countries-list__link{//a
+
+}
+
+.countries-list__name{//p
+margin: 10px 0px;
+
+}
