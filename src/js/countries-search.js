@@ -1,47 +1,73 @@
-import coountriesServices from './services/countries-services';
+// import coountriesServices from './services/countries-services';
+import countriesTemplate from '../templates/countries-template.hbs';
+import listCountriesTemplate from '../templates/countries-list-template.hbs';
+import PNotify from 'pnotify/dist/es/PNotify.js';
+
+const baseUrl = 'https://restcountries.eu/rest/v2/name/';
 const _ = require('lodash');
 
 const refs = {
-  // searchForm: document.querySelector('#search-form'),
   input: document.querySelector('#search-input'),
   countriesList: document.querySelector('#countries-list'),
+  countriesItem: document.getElementsByClassName('.card'),
+  clearButton: document.querySelector('#clear-button'),
 };
 
-const input = refs.input.addEventListener('input', serachInputHandler);
-// console.log(input);
+const inputDelay = _.debounce(searchInputHandler, 1000);
 
-console.log('Starting app');
-console.log(_.isString(true));
-console.log(_.isString('Saurabh'));
+refs.input.addEventListener('input', inputDelay);
+refs.clearButton.addEventListener('click', resetPage);
 
-function serachInputHandler(event) {
-  // _.debounce(console.log(event), 500);
-  // event.preventDafault();
-  // console.log(event.currentTarget);
-  console.log(event.target.value);
+function searchInputHandler(event) {
   let inputValue = event.target.value;
-  // console.log(inputValue);
 
-  // inputValue = inputValue.replace(' ', '').toLowerCase();
-  // console.log(inputValue);
-
-  // const input = event.currentTarget.elements.query;
-  // console.log(input);
-
-  coountriesServices.serchQuery = event.target.value;
-
-  fetch(coountriesServices)
+  fetch(baseUrl + inputValue)
     .then(response => {
-      //* response handling
-      console.log(response);
       return response.json();
     })
     .then(data => {
-      //* data handling
       console.log(data);
+
+      if (data.length >= 10) {
+        console.log('Сделай запрос более специфичным');
+        notice();
+      } else if (data.length > 2 && data.length < 10) {
+        console.log('Покажи список стран');
+        renderListCountries(data);
+      } else {
+        renderCountriesRows(data);
+      }
     })
     .catch(error => {
-      //* error handling
       console.log(error);
     });
+}
+
+function notice() {
+  PNotify.alert({
+    title: 'Alert',
+    text: 'Too many matches found. Please enter a more specific query!',
+    width: 'auto',
+    type: 'info',
+  });
+}
+
+function renderListCountries(countries) {
+  const markup = countries
+    .map(countries => listCountriesTemplate(countries))
+    .join('');
+
+  refs.countriesList.insertAdjacentHTML('beforeend', markup);
+}
+
+function renderCountriesRows(countries) {
+  const markup = countries
+    .map(countries => countriesTemplate(countries))
+    .join('');
+
+  refs.countriesList.insertAdjacentHTML('beforeend', markup);
+}
+
+function resetPage() {
+  refs.countriesList.innerHTML = '';
 }

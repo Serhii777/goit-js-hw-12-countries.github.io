@@ -4,7 +4,7 @@ const baseUrl = 'https://restcountries.eu/rest/v2/name/';
 
 export default {
   page: 1,
-  value: '',
+  inputValue: '',
   fetchArticles() {
     // const options = {
     //   headers: {
@@ -12,33 +12,36 @@ export default {
     //   },
     // };
 
-    const requestParams = `/${this.value}&page=${this.page}&pageSize=10`;
+    // const requestParams = `/${this.inputValue}&page=${this.page}&pageSize=10`;
+    const requestParams = `/${this.inputValue}`;
+    // console.log(inputValue);
+    
 
     return (
       fetch(baseUrl + requestParams, options) //* то, что возвратит БЕ
         .then(response => response.json()) //* то,что возвратит Ф. внутри
         //? т.е. fetchArticles теперь возвращает промис, и мы можем перенести
         //? then(data) в файл news-search.js в Ф. searchFormSubmitHandler
-        .then(parseResponse => {
-          this.incrementPage(); //* вызываем пагинацию
-          return parseResponse.articles;
+        .then(data => {
+          // this.incrementPage(); //* вызываем пагинацию
+          return data[0];
         })
       //* но возьмем тут только articles, а не весь Об.
     );
   },
 
   get searchQuery() {
-    return this.value;
+    return this.inputValue;
   },
 
   set searchQuery(string) {
-    this.value = string;
+    this.inputValue = string;
   },
 
-  incrementPage() {
-    //* делаем Мт. для пагинации
-    this.page += 1;
-  },
+  // incrementPage() {
+  //   //* делаем Мт. для пагинации
+  //   this.page += 1;
+  // },
 
   resetPage() {
     this.page = 1;

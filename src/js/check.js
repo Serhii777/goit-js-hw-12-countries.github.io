@@ -1,7 +1,14 @@
+import coountriesServices from './services/countries-services';
 import newRowTemplate from '../templates/countries-template.hbs';
+
 const countriesRef = document.querySelector('#countries-list');
 
-fetch('https://restcountries.eu/rest/v2/name/switzerland')
+const baseUrl = 'https://restcountries.eu/rest/v2/name/';
+const nameCountries = 'sudan';
+// const fullNameCountries = '&fullText=true';
+
+// fetch('https://restcountries.eu/rest/v2/name/')
+fetch(baseUrl + nameCountries)
   .then(response => {
     //* response handling
     console.log(response);
@@ -9,9 +16,8 @@ fetch('https://restcountries.eu/rest/v2/name/switzerland')
   })
   .then(data => {
     //* data handling
-    console.log(data);
-    // console.log(data.items);
-    console.dir(data);
+    console.log(data[0]);
+    console.dir(data[0]);
     renderCountriesRows(data);
   })
   .catch(error => {
