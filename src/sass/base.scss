@@ -12,11 +12,11 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
   transition: color 150ms ease-out, background-color 150ms ease-out;
   font-size: 16px;
-  background-color: rgb(252, 240, 240);
+  background-color: rgb(237, 252, 239);
   color: #212121;
   padding: 10px;
 }
@@ -26,40 +26,3 @@ body {
   width: 100%;
   height: auto;
 }
-
-// .container {
-//   text-align: center;
-//   margin-top: 2rem;
-
-//   font-family: sans-serif;
-// }
-
-/* MENU */
-
-// .button {
-//   display: inline-flex;
-//   align-items: center;
-//   justify-content: center;
-//   color: #fff;
-//   background-color: #2196f3;
-//   border: 0;
-//   outline: 0;
-//   padding: 8px 24px;
-//   border-radius: 4px;
-//   cursor: pointer;
-//   box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.05);
-//   font: inherit;
-//   font-weight: 500;
-//   user-select: none;
-//   transition: background-color 200ms ease-in-out;
-// }
-
-// .button:hover {
-//   box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.15);
-//   background-color: #1976d2;
-// }
-
-// .button__icon {
-//   margin-right: 8px;
-// }
-
